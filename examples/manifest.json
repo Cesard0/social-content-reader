@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "chosen-local-video",
+      "file": "my-video.mp4",
+      "platform": "local",
+      "content_type": "video",
+      "transcript_file": "transcript.txt",
+      "post_context_file": "caption.txt",
+      "requires": ["frames", "transcript", "post_context"]
+    },
+    {
+      "id": "chosen-post",
+      "url": "https://www.youtube.com/watch?v=REPLACE_WITH_YOUR_SELECTION",
+      "platform": "youtube",
+      "content_type": "short_video",
+      "requires": ["frames", "speech_if_present"]
+    }
+  ]
+}

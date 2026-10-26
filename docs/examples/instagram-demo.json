@@ -1,0 +1,42 @@
+{
+  "kind": "sanitized historical example",
+  "source_url": "https://www.instagram.com/p/DemLMidtxxj/",
+  "source_creator": "kem_glitch",
+  "topic": "Developing software with AI",
+  "retrieval": "success",
+  "post_context": "available",
+  "speech": {
+    "status": "success",
+    "method": "local whisper.cpp ASR; automatic and unreviewed"
+  },
+  "sampled_frames": 12,
+  "inspected_frame_timestamps_seconds": [
+    6.73,
+    20.2,
+    33.66,
+    47.12,
+    60.59,
+    74.05,
+    87.51,
+    100.98,
+    114.44,
+    127.9,
+    141.37,
+    154.83,
+    12,
+    40,
+    108,
+    135,
+    147
+  ],
+  "interpretation_by": "Codex using transcript, post context, and visual inspection",
+  "summary_paraphrase": "The creator separates repeatable scripts from model judgment, keeps human intent explicit, and describes bounded validation and review.",
+  "limitations": [
+    "Saved analysis, not an independent comprehension score.",
+    "Some software names remain uncertain and were omitted.",
+    "Sampled frames do not cover every visual moment.",
+    "The earlier visual note says speech was pending; the later transcript and completed analysis establish its subsequent availability."
+  ],
+  "public_redaction": "Only selected status fields, public attribution, timestamps, and a paraphrase are included. Original media, transcripts, local paths, and raw logs remain private.",
+  "observed_date_utc": "2026-10-22"
+}

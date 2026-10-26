@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Social Content Reader · Evidence walkthrough</title>
+<style>
+:root{color-scheme:light;--ink:#172620;--muted:#536159;--paper:#f6f5ef;--green:#285844;--line:#d8dfd5;--pale:#e9eee6;--gold:#fff0ce}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--green);text-underline-offset:3px}button{font:inherit}header{max-width:1176px;margin:auto;padding:24px 32px 0;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:750;font-size:16px;letter-spacing:-.4px}.dot{display:inline-block;width:10px;height:10px;background:#759c67;border-radius:50%;margin-right:9px}.label{font:11px/1.5 ui-monospace,monospace;text-transform:uppercase;letter-spacing:1.1px;color:var(--muted)}nav{display:flex;gap:6px}nav button{border:1px solid transparent;background:transparent;color:var(--muted);padding:8px 13px;border-radius:7px;cursor:pointer}nav button[aria-selected=true]{background:var(--ink);color:white}button:focus-visible,a:focus-visible{outline:3px solid #ba731e;outline-offset:3px}main{max-width:1176px;margin:auto;padding:35px 32px 28px}.eyebrow{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--green)}h1{font-size:clamp(32px,4.4vw,52px);line-height:1.08;letter-spacing:-2px;margin:12px 0 16px;max-width:850px}h2{font-size:22px;line-height:1.2;letter-spacing:-.6px;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px}p{margin:0 0 12px}.lead{font-size:18px;color:var(--muted);max-width:750px;line-height:1.55}.context{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 24px}.pill{background:var(--pale);border:1px solid var(--line);border-radius:20px;padding:4px 11px;font-size:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.three{grid-template-columns:repeat(3,1fr)}.card{background:white;border:1px solid var(--line);border-radius:12px;padding:24px;min-width:0}.dark{background:var(--ink);color:#f4f7ed;border-color:var(--ink)}.dark .label,.dark .muted{color:#b8c9bc}.step{display:inline-grid;place-items:center;width:29px;height:29px;border:1px solid var(--line);border-radius:50%;font-size:12px;font-weight:700;margin-bottom:17px}.rows{margin:12px 0 0}.row{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding:10px 0;font-size:14px}.row:first-child{padding-top:0;border:0}.ok{color:#285844;font-weight:700}.muted{color:var(--muted)}.metric{font-size:58px;line-height:1.1;font-weight:650;letter-spacing:-2px;margin:8px 0}.caption{font-size:13px;color:var(--muted)}.note{background:var(--pale);border:1px solid var(--line);border-radius:8px;padding:14px 18px;font-size:13px;margin-top:18px}.warn{background:var(--gold);border-color:#e9d3a5}.quote{font-size:20px;line-height:1.45;letter-spacing:-.25px}.timestamp{font:12px ui-monospace,monospace;display:block;color:var(--green);margin-bottom:5px}.dark .timestamp{color:#b6d2a9}.timeline{margin-top:16px;padding-left:16px;border-left:2px solid var(--line)}.timeline p{font-size:14px;margin:0 0 13px}.code{font:12px/1.7 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;padding:15px;background:#edf0eb;border-radius:7px;margin:12px 0}.dark .code{background:#293b30;color:#dfeddc}footer{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:24px;padding-top:14px;font-size:11px;color:var(--muted)}section[hidden]{display:none}.arrow{font-size:20px;color:var(--muted)}.small{font-size:13px}.screen-note{max-width:1176px;padding:0 32px 16px;margin:auto;font-size:11px;color:var(--muted)}
+@media(max-width:700px){header{padding:18px 20px 0;align-items:flex-start;flex-direction:column}main{padding:24px 20px}.grid,.three{grid-template-columns:1fr}nav{width:100%;justify-content:space-between}nav button{padding:7px 10px;font-size:14px}h1{letter-spacing:-1px}.card{padding:20px}.metric{font-size:46px}footer{flex-direction:column;gap:5px}.screen-note{padding:0 20px 16px}}
+</style>
+<header><div class="brand"><span class="dot"></span>Social Content Reader</div><nav role="tablist" aria-label="Walkthrough views"><button id="tab-overview" role="tab" aria-controls="overview" aria-selected="true">The workflow</button><button id="tab-instagram" role="tab" aria-controls="instagram" aria-selected="false">Instagram example</button><button id="tab-youtube" role="tab" aria-controls="youtube" aria-selected="false">Failure &amp; fix</button></nav></header>
+<main>
+<section id="overview" role="tabpanel" aria-labelledby="tab-overview">
+<div class="eyebrow">Personal project / evidence-first explanations</div>
+<h1>A useful explanation starts<br>with inspectable evidence.</h1>
+<p class="lead">Python gathers and preserves the source material. Codex reads it, inspects the visuals, and explains what it can actually support.</p>
+<div class="context"><span class="pill">Local CLI + agent workflow</span><span class="pill">Existing runs · October 2026</span><span class="pill">No hosted service</span></div>
+<div class="grid three">
+<article class="card"><span class="step">01</span><h2>Collect</h2><p class="muted">Retrieve accessible media and context. Extract frames and audio; use subtitles or local ASR.</p><div class="label">Python + media tools</div></article>
+<article class="card"><span class="step">02</span><h2>Preserve</h2><p class="muted">Save statuses, timestamps, and artifact hashes. Reuse cached evidence and retain prior attempts.</p><div class="label">Python + local cache</div></article>
+<article class="card dark"><span class="step">03</span><h2>Interpret</h2><p class="muted">Read speech and post text. Inspect visuals. Explain the content and identify uncertainty.</p><div class="label">Codex + host tools</div></article>
+</div>
+<div class="note"><strong>The boundary matters.</strong> A successful download is not proof of understanding. The Python helper does not summarize posts or perform visual understanding.</div>
+</section>
+<section id="instagram" role="tabpanel" aria-labelledby="tab-instagram" hidden>
+<div class="eyebrow">01 / Observed Instagram example</div>
+<h1>From one link to<br>an explanation you can inspect.</h1>
+<p class="lead">A creator describes developing software with AI. The saved workflow preserves the evidence before Codex explains the message.</p>
+<div class="context"><span class="pill">Source: kem_glitch</span><span class="pill">Observed October 22, 2026 UTC</span><span class="pill">Historical record · sanitized view</span></div>
+<div class="grid">
+<article class="card"><div class="label">Python / saved artifacts</div><h2>Evidence available</h2><div class="rows"><div class="row"><span>Video retrieval</span><span class="ok">Success</span></div><div class="row"><span>Post context</span><span class="ok">Available</span></div><div class="row"><span>Speech transcription</span><span class="ok">Local whisper.cpp</span></div></div><div class="metric">12 <span class="arrow">+</span> 5</div><p class="caption">Sampled frames + additional frame inspections.<br>Automatic speech transcription; not independently scored.</p></article>
+<article class="card dark"><div class="label">Codex / paraphrase of saved analysis</div><h2>What the explanation captures</h2><p class="quote">Repeatable work uses scripts. Model judgment needs evaluation. Humans keep intent explicit.</p><div class="timeline"><p><span class="timestamp">00:07–00:33</span>Repeatable skills, scripts, and model judgment.</p><p><span class="timestamp">00:33–01:09</span>Human intent, scope, and small working slices.</p><p><span class="timestamp">01:38–02:41</span>Bounded validation, review, and the final human check.</p></div></article>
+</div>
+<div class="note"><strong>Explicit limits:</strong> uncertain software names omitted; frame sampling is not exhaustive. The saved analysis is an example, not a comprehension benchmark.</div>
+</section>
+<section id="youtube" role="tabpanel" aria-labelledby="tab-youtube" hidden>
+<div class="eyebrow">02 / Engineering judgment</div>
+<h1>Keep useful evidence.<br>Keep the failure visible.</h1>
+<p class="lead">A subtitle request failed with HTTP 429. The response was a bounded collector change, followed by a documented live retry.</p>
+<div class="context"><span class="pill">Source: jawed · Me at the zoo</span><span class="pill">Historical before / after</span><span class="pill">One recovery example</span></div>
+<div class="grid three">
+<article class="card"><div class="label">Before / recorded attempt</div><h2>Subtitle failure</h2><div class="code">HTTP 429
+Retrieval: failed
+Local frames: 0</div><p class="small muted">Some captions and browser visuals were accessible. No local video or sampled frames from this attempt.</p></article>
+<article class="card"><div class="label">Decision / collector + reader</div><h2>Preserve partial work</h2><p class="small muted">Continue downloader errors. Keep usable media. Preserve partial status when errors remain.</p><p class="small muted">Narrow subtitle requests; use optional local ASR if subtitles are unavailable.</p><div class="note warn small">Error survival must not turn incomplete evidence into “success.”</div></article>
+<article class="card dark"><div class="label">After / recorded live retry</div><h2>Evidence recovered</h2><div class="code">Retrieval: success
+Speech: subtitles
+Audio: success
+Frames: 12 / 12</div><p class="small muted">A fresh chat reused the cache, read subtitles, and inspected all 12 frames.</p></article>
+</div>
+<div class="note"><strong>Separate checks:</strong> the live retry shows recovery on one example. A simulated regression test checks that media survives a subtitle error and remains labeled partial. Neither proves universal platform reliability.</div>
+</section>
+<footer><span>Documentation view of saved evidence · not a shipped application UI</span><span><a href="case-study.md">Case study</a> · <a href="examples/instagram-demo.json">Instagram record</a> · <a href="examples/youtube-recovery.json">Recovery record</a></span></footer>
+</main>
+<div class="screen-note">Public view contains selected status fields and paraphrased analysis. No original media, full transcripts, raw logs, private paths, or chat exports.</div>
+<script>
+const buttons=[...document.querySelectorAll('[role=tab]')];
+function show(id){if(!['overview','instagram','youtube'].includes(id))id='overview';buttons.forEach(b=>b.setAttribute('aria-selected',String(b.id==='tab-'+id)));document.querySelectorAll('[role=tabpanel]').forEach(p=>p.hidden=p.id!==id);history.replaceState(null,'','#'+id)}
+buttons.forEach((b,i)=>{b.addEventListener('click',()=>show(b.getAttribute('aria-controls')));b.addEventListener('keydown',e=>{let n=i;if(e.key==='ArrowRight')n=(i+1)%buttons.length;else if(e.key==='ArrowLeft')n=(i+buttons.length-1)%buttons.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=buttons.length-1;else return;e.preventDefault();buttons[n].focus();show(buttons[n].getAttribute('aria-controls'))})});show(location.hash.slice(1));
+</script>
+</html>

@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "social-content-eval"
+version = "0.1.0"
+description = "Reusable social video evidence and auditable sample evaluation"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+content-eval = "content_eval.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["content_eval*"]

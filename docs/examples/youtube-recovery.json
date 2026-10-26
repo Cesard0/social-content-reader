@@ -1,0 +1,37 @@
+{
+  "kind": "sanitized historical failure and recovery",
+  "source_url": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+  "source_creator": "jawed",
+  "before": {
+    "retrieval": "failed",
+    "failure": "HTTP 429 during subtitle retrieval",
+    "local_video": false,
+    "local_sampled_frames": 0,
+    "available_fallback": "Some English captions and browser visuals; documented limitations."
+  },
+  "change": {
+    "collector": "Continue downloader errors, retain actual usable media, mark remaining errors partial.",
+    "reader": "Narrow subtitle languages; optional local ASR when subtitles are unavailable.",
+    "code_reference": "content_eval/evidence.py:retrieve and content_eval/reader.py:transcribe"
+  },
+  "after": {
+    "retrieval": "success",
+    "speech": "subtitles",
+    "audio": "success",
+    "frames_saved": 12,
+    "frames_inspected": 12,
+    "fresh_chat_cache_reuse": "Recorded in the private activation verification notes.",
+    "observed_date_utc": "2026-10-22"
+  },
+  "regression": {
+    "test": "test_subtitle_error_keeps_downloaded_media_and_partial_status",
+    "type": "simulated downloader; not a live rate-limit test",
+    "assertion": "Usable media survives and retrieval remains partial when subtitle errors are present."
+  },
+  "limitations": [
+    "One live recovery example, not general platform reliability.",
+    "A successful retry does not prove every fallback branch occurred.",
+    "Saved statuses are historical; this portfolio build did not re-download the posts."
+  ],
+  "public_redaction": "Raw downloader diagnostics, paths, media, and full subtitles omitted."
+}
