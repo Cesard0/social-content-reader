@@ -38,3 +38,17 @@ Public examples omit original media and full transcripts, so an external reader 
 The README and walkthrough were revised using adapted [gstack design-review guidance](https://github.com/garrytan/gstack/tree/main/design-review) and the owner's preferred Needle comparison as a visual reference. This is a source-guided design pass, not execution of the native gstack runtime. The toolkit, original comparison files, and private design notes are not part of this repository.
 
 The revised presentation uses one clear primary action, warmer colors, stronger type hierarchy, and fewer decorative containers. All three views were checked at 375, 768, and 1440 CSS pixels without horizontal overflow. Navigation targets meet a 44-pixel minimum; the primary action and arrow-key tab navigation were exercised in the browser. Screenshot contents remain sanitized historical summaries. Python source and tests were unchanged by this presentation-only revision.
+
+## Public portfolio follow-up — October 26, 2026
+
+Executed on the public checkout with Python 3.9.6 and FFmpeg/ffprobe 9.0.2:
+
+- Existing suite: **20/20 passed**, including real FFmpeg extraction and saved-source reuse. Both CLI help commands also passed. Core package, tests, and package metadata were unchanged by this revision.
+- `python3 tools/public_example.py /tmp/scr-example-run`: exercised here with a fresh temporary directory. Two original synthetic videos were retrieved locally and prepared; an intentionally missing third input remained failed. Recollection verified cache reuse and identical saved records. Nine exported media/text hashes matched their published assets.
+- The synthetic frames were visually inspected. The 1.5- and 4.5-second samples miss the brief blue banner; the targeted 2.9-second frame captures it. This checks a designed failure mode, not model comprehension or live-platform reliability. The full illustrative answer was composed with knowledge of the fixture; it is not a blinded comparison.
+- New and changed Markdown file targets were checked locally; no missing file targets were found. Public text was checked for local home-directory paths and credential-like prefixes; exported synthetic artifacts were explicitly allowlisted.
+- GitHub Pages reported a successful build. Unauthenticated HTTP requests returned **200** for the profile, hosted walkthrough, legacy walkthrough entry, both synthetic videos, collection record, case study, public example, and setup guide.
+- Live desktop browser checks confirmed the walkthrough primary action, all three panels, and arrow-key tab navigation. The live page was also rendered inside a 375-CSS-pixel iframe and the main action and tabs exercised. This is a responsive layout check, not physical-device or exhaustive accessibility testing.
+- The public profile now shows the professional name, AI/workflow PM focus, profile README, and pinned project. The walkthrough disclaimer is beside the first action; documentation links point to public GitHub files.
+
+All follow-up checks are Codex self-review. No user interviews, measured user benefit, human-reviewed comprehension study, successful X retrieval, or new live Instagram/YouTube retrieval were performed. The existing human-review gate was preserved. The next [value evaluation](evaluation-plan.md) remains a protocol, not a result.
