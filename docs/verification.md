@@ -32,3 +32,9 @@ For the installed-package check, the tests ran from outside the source tree in a
 No fresh live Instagram/YouTube download, successful X retrieval, platform-wide reliability, end-user adoption, or general explanation accuracy is claimed. The case-study demonstrations reuse historical saved records. The original host's automatic skill activation is environment-specific and is not installed or re-tested by this public package.
 
 Public examples omit original media and full transcripts, so an external reader cannot independently reproduce every historical observation from repository files alone. Original source posts are linked and may be subject to access restrictions.
+
+## Presentation revision
+
+The README and walkthrough were revised using adapted [gstack design-review guidance](https://github.com/garrytan/gstack/tree/main/design-review) and the owner's preferred Needle comparison as a visual reference. This is a source-guided design pass, not execution of the native gstack runtime. The toolkit, original comparison files, and private design notes are not part of this repository.
+
+The revised presentation uses one clear primary action, warmer colors, stronger type hierarchy, and fewer decorative containers. All three views were checked at 375, 768, and 1440 CSS pixels without horizontal overflow. Navigation targets meet a 44-pixel minimum; the primary action and arrow-key tab navigation were exercised in the browser. Screenshot contents remain sanitized historical summaries. Python source and tests were unchanged by this presentation-only revision.

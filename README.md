@@ -1,89 +1,63 @@
 # Social Content Reader
 
-An evidence-first workflow for explaining social posts without treating a download—or a plausible answer—as proof of understanding.
+A local Python + Codex workflow for explaining social posts from saved source evidence.
+
+![Read the post. Check the evidence. A saved Instagram example and the collection-to-interpretation workflow.](docs/images/workflow.jpg)
+
+**[See a real example →](docs/case-study.md#instagram-demonstration)** · [Run locally](docs/setup.md) · [Browse the code](content_eval/reader.py)
+
+## Why it exists
+
+A title misses the speech. A transcript misses the visuals. A plausible summary can miss both. This project keeps the accessible source material, the explanation, and the missing pieces distinguishable.
 
 **Python gathers and preserves evidence. Codex interprets it.**
 
-Personal project by César Reverón, developed with Codex assistance. Local CLI and agent workflow; not a hosted service. The examples below demonstrate specific runs, not general accuracy or platform reliability.
+| Python prepares | Codex interprets |
+| --- | --- |
+| Retrieve accessible video and post context | Read speech and post text |
+| Extract timestamped frames and subtitles or local transcription | Inspect frames and use host browser tools for missing context |
+| Preserve statuses, hashes, and previous attempts | Explain the content and identify uncertainty |
 
-![Instagram demonstration: collected evidence, inspection coverage, and explanation](docs/images/instagram-demo.jpg)
+The Python command produces evidence, not a summary. Codex and its image/browser tools come from the host. Cloning this repository does not install automatic assistant activation.
 
-[Instagram walkthrough](docs/case-study.md#instagram-demonstration) · [Engineering decision](docs/case-study.md#youtube-failure-and-recovery) · [Setup](docs/setup.md) · [Verification](docs/verification.md)
+## One post, inspected
 
-## Why I built it
+An Instagram creator explains developing software with AI. The saved run contains video, post context, a local transcript, and **12 sampled frames plus five additional frame inspections**. Codex's saved explanation uses timestamps and leaves uncertain software names unresolved.
 
-I wanted to share a social post with an assistant and get an explanation grounded in what the post actually contains. A title, a transcript, or a few frames can each omit important context. This project keeps those evidence sources—and their gaps—visible.
+![Instagram evidence and a paraphrase of the saved explanation.](docs/images/instagram-demo.jpg)
 
-## What happens to a link
+[Read the walkthrough](docs/case-study.md#instagram-demonstration) · [Inspect the sanitized record](docs/examples/instagram-demo.json) · [Original post by kem_glitch](https://www.instagram.com/p/DemLMidtxxj/)
 
-1. **Python prepares evidence:** canonicalizes the URL, retrieves accessible media and post context, extracts timestamped frames and audio, and uses subtitles or local speech transcription.
-2. **Python preserves the run:** records statuses, tool output, and artifact hashes. Repeated links reuse verified cached evidence; refreshes preserve previous attempts.
-3. **Codex interprets:** reads the text, visually inspects frames, uses browser tools when needed, and explains the content while identifying uncertainty.
+## A failure worth showing
 
-The Python command does **not** summarize posts, perform visual understanding, or independently check factual claims. Codex and its browser/image tools are supplied by the host, not this Python package. No model API is bundled.
+A YouTube subtitle request hit **HTTP 429**. The first attempt saved no local video or frames. The collector was changed to preserve usable media while keeping remaining errors labeled partial; the reader narrowed subtitle requests and supports local transcription when needed.
 
-## Demonstrated example: Instagram
+A later live retry saved video, English subtitles, audio, and 12 frames. A separate simulated regression test checks that a subtitle error does not discard usable media or mislabel it complete.
 
-A saved run examined a creator's explanation of developing software with AI. It collected the video and post context, produced a local transcript, and supported a timestamped explanation. Saved inspection notes record **12 sampled frames plus five additional frames** around details that needed closer inspection.
+![YouTube subtitle failure, the collector decision, and observed recovery.](docs/images/youtube-recovery.jpg)
 
-The explanation distinguishes repeatable scripts from model judgment, describes the creator's approach to human intent and validation, and leaves uncertain software names unresolved. Speech transcription and sampled visuals are fallible; this is an observed example, not a scored comprehension benchmark.
-
-[Read the case study](docs/case-study.md) · [Inspect the sanitized example](docs/examples/instagram-demo.json) · [Original post by kem_glitch](https://www.instagram.com/p/DemLMidtxxj/)
-
-## Engineering decision: survive subtitle failure
-
-![YouTube recovery: failed subtitle retrieval, bounded change, successful retry](docs/images/youtube-recovery.jpg)
-
-A YouTube attempt hit **HTTP 429 during subtitle retrieval**, leaving no local video or sampled frames. The collector was changed to continue past downloader errors while preserving a partial status when errors remain. The reader narrows subtitle requests and can use local speech transcription when subtitles are unavailable. A later live retry saved video, English subtitles, audio, and 12 frames; a fresh chat reused the cache.
-
-The live retry demonstrates recovery on that example. A separate regression test simulates a subtitle error with usable media and checks that it remains available **and labeled partial**. These are different kinds of evidence.
-
-[Decision and tradeoffs](docs/case-study.md#youtube-failure-and-recovery) · [Sanitized recovery record](docs/examples/youtube-recovery.json) · [Regression test](tests/test_reader.py)
+[Read the engineering story](docs/case-study.md#youtube-failure-and-recovery) · [Recovery record](docs/examples/youtube-recovery.json) · [Regression tests](tests/test_reader.py)
 
 ## Run locally
 
-Use Python 3.11+ for the documented media setup. The core package has no third-party Python runtime dependencies; live retrieval and optional speech transcription require external tools.
+Use Python 3.11+ for the media setup. The core package has no third-party Python runtime dependencies.
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .
-python -m content_eval --help
 python -m content_eval.reader --help
 python -m unittest discover -s tests -v
 ```
 
-For a real link, install the [media dependencies](docs/setup.md), then:
+Live retrieval requires media tools; speech fallback also requires local model weights. **[Follow the setup guide](docs/setup.md)** before running a link. The separate [batch evaluation workflow](docs/batch-workflow.md) supports human-reviewed references and auditable scoring; no model API is bundled.
 
-```sh
-python -m content_eval.reader 'https://www.instagram.com/p/DemLMidtxxj/'
-```
+## Status, contribution, and boundaries
 
-This produces evidence and an index, not an explanation. Read the saved text and inspect the frames with your assistant. The original author's local automatic Codex activation is not installed by cloning this repository.
+Personal project by César Reverón, developed with Codex assistance. The [verification record](docs/verification.md) documents **20 passing tests**, including real FFmpeg extraction/cache reuse, and a fresh-environment installation check.
 
-The separate [batch evaluation workflow](docs/batch-workflow.md) supports human-reviewed references, frozen scoring rules, and auditable results. It imports answers and scores produced separately; it does not call a model or automatically establish ground truth.
+These are specific observed examples, not a cross-platform accuracy or reliability benchmark. Platform restrictions, transcription errors, and sparse frame sampling remain limitations. The public package does not include the original local Codex skill installation.
 
-## Scope and limits
+The screenshots are a designed walkthrough of sanitized saved records, not a shipped app UI. Raw media, full transcripts, logs, chats, credentials, and local configuration remain private. [Publication boundaries](docs/publication.md).
 
-- Login walls, rate limits, deleted posts, and adapter failures can prevent access. X routing exists; no successful X example is claimed here.
-- Sparse frame sampling can miss events. Automatic captions and speech transcription can be wrong.
-- Collection status and explanation quality are separate. No cross-platform accuracy, customer adoption, or performance claims.
-- Local caches can contain third-party media, post text, URLs, and diagnostic data. They are excluded from this repository.
-
-## Visual walkthrough
-
-The three-view [documentation walkthrough](docs/walkthrough.html) is included with no external assets or tracking. To view it locally:
-
-```sh
-python3 -m http.server 8000 --bind 127.0.0.1
-```
-
-Open `http://127.0.0.1:8000/docs/walkthrough.html`. GitHub displays the screenshots above; the HTML file is a local preview, not a hosted app.
-
-![Collection, preservation, and interpretation boundaries](docs/images/workflow.jpg)
-
-## What is public
-
-Only reviewed source, tests, portable instructions, sanitized example summaries, and screenshots of those summaries. Screenshots are labeled documentation views of saved records—not a shipped application UI or a new live run. Raw recordings, frames, full transcripts, chat exports, local configuration, and model weights remain private. Source posts are linked and credited; their media is not redistributed.
-
-See [publication boundaries](docs/publication.md) and [verification results](docs/verification.md).
+The [HTML walkthrough](docs/walkthrough.html) is also included for local viewing: run `python3 -m http.server 8000 --bind 127.0.0.1` from this repository, then open `http://127.0.0.1:8000/docs/walkthrough.html`.
