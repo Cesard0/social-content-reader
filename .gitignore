@@ -30,3 +30,22 @@
 !/pyproject.toml
 !/tests/test_reader.py
 !/tests/test_workflow.py
+
+# Explicitly reviewed public portfolio additions
+!/tools/
+!/tools/public_example.py
+!/docs/index.html
+!/docs/.nojekyll
+!/docs/public-example.md
+!/docs/evaluation-plan.md
+!/docs/examples/controlled/
+!/docs/examples/controlled/steady.mp4
+!/docs/examples/controlled/brief.mp4
+!/docs/examples/controlled/steady-0.jpg
+!/docs/examples/controlled/steady-1.jpg
+!/docs/examples/controlled/brief-0.jpg
+!/docs/examples/controlled/brief-1.jpg
+!/docs/examples/controlled/brief-extra-2.9.jpg
+!/docs/examples/controlled/transcript.txt
+!/docs/examples/controlled/context.txt
+!/docs/examples/controlled/collection.json

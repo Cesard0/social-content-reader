@@ -8,11 +8,12 @@ This repository is a curated export of a local personal project, not a copy of i
 - Portable documentation and a short case study.
 - Allowlisted, sanitized status summaries with public source attribution.
 - Screenshots of documentation views rendered from those summaries.
-- A local-only viewer and its source so the visuals are inspectable.
+- A static public documentation viewer and its source.
+- Original synthetic example videos, supplied text, extracted frames, and allowlisted collection results; these contain no third-party posts.
 
 ## Excluded
 
-- Raw videos, audio, frames, captions, full speech transcripts, and model weights.
+- Historical third-party videos, audio, frames, captions, full speech transcripts, and model weights. The explicitly allowlisted original synthetic fixtures are the exception.
 - Original command logs, downloader metadata, signed URLs, and browser sessions.
 - Chat exports, internal notes, skill installations, local paths, hardware details, and account configuration.
 - Credentials, cookies, email addresses, and virtual environments.

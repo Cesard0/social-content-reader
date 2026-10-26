@@ -1,6 +1,6 @@
 # Evidence map
 
-The public records are allowlisted summaries of private saved artifacts. Original bytes and their SHA-256 digests are retained locally. Raw artifacts, private hashes, and exact collection times are not distributed. These summaries document the observed examples; they are not independently verified ground truth.
+The historical social-post records are allowlisted summaries of private saved artifacts. Original bytes and their SHA-256 digests are retained locally. Raw artifacts, private hashes, and exact collection times are not distributed. These summaries document the observed examples; they are not independently verified ground truth.
 
 | Public claim | Supporting material | Evidence type |
 | --- | --- | --- |
@@ -14,3 +14,7 @@ The public records are allowlisted summaries of private saved artifacts. Origina
 | Core tests and real FFmpeg integration pass | [Verification record](verification.md) | Current local execution on the public export |
 
 No full transcripts, original frames, chat exports, or raw diagnostics are required to read the public case study. Original posts remain linked for attribution; a reviewer may encounter platform access restrictions.
+
+## Fully public controlled example
+
+[Original synthetic source, collected evidence, complete illustrative answers, and self-review](public-example.md) are available without private artifacts. [Collection record](examples/controlled/collection.json) reports actual local collection, cache reuse, tool versions, and exported hashes. The example was authored and reviewed with Codex; no blinded comparison or independent human comprehension score was produced. It does not substantiate historical social-platform claims.

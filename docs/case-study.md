@@ -8,6 +8,16 @@ A social post can carry meaning in speech, captions, images, or context. Explain
 
 I used Codex to develop and iterate this personal workflow. The implementation and these portfolio materials were produced with AI assistance. The work shown here is a local tool for my own use; it does not establish external customer adoption or enterprise deployment.
 
+## Intended task and current alternative
+
+The workflow supports explaining one social post and answering follow-ups against retained evidence. The target use is a reader checking what a post actually says before relying on a summary. The current alternative is manual inspection of the post, speech, visuals, and caption, with separate notes. These are inferred use-case hypotheses, not findings from user interviews or a measured workflow study.
+
+## Contribution and AI assistance
+
+César Reverón owns this personal project. Codex assisted implementation, iteration, documentation, and the portfolio presentation. The source establishes the technical choices implemented below; it does not establish who originated each idea or which AI suggestions the owner rejected. No unsupported individual attribution is made.
+
+The controlled public example and its explanatory text were produced with Codex assistance. Its review is explicitly a self-review, not independent acceptance or human-scored ground truth.
+
 ## Instagram demonstration
 
 **Input:** [a post by kem_glitch about developing with AI](https://www.instagram.com/p/DemLMidtxxj/).
@@ -49,9 +59,17 @@ I used Codex to develop and iterate this personal workflow. The implementation a
 | Keep failures and partial results visible | Avoid silently dropping difficult posts from analysis | Consumers must read component statuses |
 | Use existing download/media tools | Focus custom code on orchestration and evidence handling | Platform behavior and external tool compatibility remain dependencies |
 
+## Reproducible public example
+
+The [controlled example](public-example.md) includes original synthetic source videos, supplied text, collected frames, full illustrative answers, and an executable generator. It exposes a limitation directly: a short blue banner is absent from both midpoint samples even though preparation succeeds. This is current inspectable collection evidence; it does not validate historical social-platform results or model comprehension.
+
+## Platform scope
+
+The package has reusable evidence/status records and a separate evaluation stage. Those are inspectable interface choices, not evidence of a platform business. Multiple consumers, developer research, interface-version migration, operational adoption, and service-level tradeoffs are not demonstrated.
+
 ## Current result and next step
 
-The saved examples demonstrate a useful local workflow and one observed failure/recovery cycle. They do not establish a general understanding score or production reliability. The next meaningful improvement would be a small human-reviewed evaluation sample, using the existing batch workflow, before claiming accuracy.
+The saved examples demonstrate a useful local workflow and one observed failure/recovery cycle. They do not establish a general understanding score or production reliability. The next value test is a small comparison against the intended user's current workflow. The [evaluation plan](evaluation-plan.md) fixes task, baseline, measures, and decision rules before a human-reviewed run. No accuracy or time-savings result is claimed yet.
 
 ## Public evidence and attribution
 

@@ -1,16 +1,41 @@
 # Social Content Reader
 
-A local Python + Codex workflow for explaining social posts from saved source evidence.
+**Inspect a social post before relying on its explanation.** A local Python + Codex workflow that preserves source evidence, distinguishes partial results, and makes missing context explicit.
 
-![Read the post. Check the evidence. A saved Instagram example and the collection-to-interpretation workflow.](docs/images/workflow.jpg)
+[Open the walkthrough →](https://cesard0.github.io/social-content-reader/) · [Product decisions](docs/case-study.md#decisions-that-matter) · [Complete public example](docs/public-example.md) · [Run locally](docs/setup.md)
 
-**[See a real example →](docs/case-study.md#instagram-demonstration)** · [Run locally](docs/setup.md) · [Browse the code](content_eval/reader.py)
+## The task
 
-## Why it exists
+Explain one post using its speech, visuals, and caption, then answer follow-up questions against the same saved evidence. The intended alternative is manually opening the post, finding speech/text, inspecting visuals, and retaining notes. This task and audience are inferred from the workflow; external user demand and time savings have not been validated.
 
-A title misses the speech. A transcript misses the visuals. A plausible summary can miss both. This project keeps the accessible source material, the explanation, and the missing pieces distinguishable.
+A title misses the speech. A transcript misses the visuals. A plausible summary can miss both. The project keeps source material, interpretation, and missing pieces distinguishable.
 
-**Python gathers and preserves evidence. Codex interprets it.**
+**Documentation walkthrough below; not a shipped application UI.** The historical examples are sanitized records, not an accuracy benchmark.
+
+![Overview of the collection, preservation, and interpretation workflow.](docs/images/workflow.jpg)
+
+## Three choices worth inspecting
+
+| Choice | Why it matters | Inspect |
+| --- | --- | --- |
+| Separate evidence preparation from interpretation | A successful download does not prove understanding | [Reader boundary](content_eval/reader.py) |
+| Preserve usable media after subtitle errors; label it partial | Useful work can continue without hiding the failure | [Failure and recovery](docs/case-study.md#youtube-failure-and-recovery), [regression test](tests/test_reader.py) |
+| Separate retrieval, preparation, and understanding measures | Missing evidence must not disappear from the denominator | [Evaluation implementation](content_eval/evaluation.py), [scoring rules](docs/batch-workflow.md#fixed-scoring-rules) |
+
+## Evidence you can inspect
+
+- **[Complete controlled example](docs/public-example.md):** original synthetic videos, supplied text, extracted frames, actual explanatory text, collection results, and a sampling failure. Reproducible without social-platform access. Codex self-review, not a model benchmark.
+- **[Instagram historical example](docs/case-study.md#instagram-demonstration):** saved collection and timestamped explanation, published as sanitized summaries. Original media and full output are not included.
+- **[YouTube failure and recovery](docs/case-study.md#youtube-failure-and-recovery):** one recorded subtitle-rate-limit failure, an implemented change, and one later successful retry. The simulated regression test checks a separate branch.
+- **[Verification](docs/verification.md):** executed checks and explicit limits. [Evidence map](docs/evidence-map.md) distinguishes public artifacts from historical self-report.
+
+## Contribution and status
+
+Personal project by **César Reverón**, developed with **Codex assistance in implementation and portfolio materials**. The repository documents implemented choices and their tradeoffs; it does not establish which ideas originated with César versus Codex. [Contribution boundaries](docs/case-study.md#contribution-and-ai-assistance).
+
+This is a local tool for personal use. No external customer adoption, production deployment, comprehension benchmark, or measured user benefit is established. The [evaluation plan](docs/evaluation-plan.md) defines what would be needed to test value. No broad platform reliability claim is made.
+
+## How it works
 
 | Python prepares | Codex interprets |
 | --- | --- |
@@ -18,29 +43,11 @@ A title misses the speech. A transcript misses the visuals. A plausible summary 
 | Extract timestamped frames and subtitles or local transcription | Inspect frames and use host browser tools for missing context |
 | Preserve statuses, hashes, and previous attempts | Explain the content and identify uncertainty |
 
-The Python command produces evidence, not a summary. Codex and its image/browser tools come from the host. Cloning this repository does not install automatic assistant activation.
-
-## One post, inspected
-
-An Instagram creator explains developing software with AI. The saved run contains video, post context, a local transcript, and **12 sampled frames plus five additional frame inspections**. Codex's saved explanation uses timestamps and leaves uncertain software names unresolved.
-
-![Instagram evidence and a paraphrase of the saved explanation.](docs/images/instagram-demo.jpg)
-
-[Read the walkthrough](docs/case-study.md#instagram-demonstration) · [Inspect the sanitized record](docs/examples/instagram-demo.json) · [Original post by kem_glitch](https://www.instagram.com/p/DemLMidtxxj/)
-
-## A failure worth showing
-
-A YouTube subtitle request hit **HTTP 429**. The first attempt saved no local video or frames. The collector was changed to preserve usable media while keeping remaining errors labeled partial; the reader narrowed subtitle requests and supports local transcription when needed.
-
-A later live retry saved video, English subtitles, audio, and 12 frames. A separate simulated regression test checks that a subtitle error does not discard usable media or mislabel it complete.
-
-![YouTube subtitle failure, the collector decision, and observed recovery.](docs/images/youtube-recovery.jpg)
-
-[Read the engineering story](docs/case-study.md#youtube-failure-and-recovery) · [Recovery record](docs/examples/youtube-recovery.json) · [Regression tests](tests/test_reader.py)
+The Python command produces evidence, not a summary. Image/browser tools come from the host. Cloning this repository does not install automatic assistant activation.
 
 ## Run locally
 
-Use Python 3.11+ for the media setup. The core package has no third-party Python runtime dependencies.
+Use Python 3.11+ for media setup. The core package has no third-party Python runtime dependencies.
 
 ```sh
 python3 -m venv .venv
@@ -50,14 +57,6 @@ python -m content_eval.reader --help
 python -m unittest discover -s tests -v
 ```
 
-Live retrieval requires media tools; speech fallback also requires local model weights. **[Follow the setup guide](docs/setup.md)** before running a link. The separate [batch evaluation workflow](docs/batch-workflow.md) supports human-reviewed references and auditable scoring; no model API is bundled.
+Live retrieval requires media tools; speech fallback also requires local model weights. [Setup guide](docs/setup.md) · [Batch evaluation](docs/batch-workflow.md) · [Publication boundaries](docs/publication.md).
 
-## Status, contribution, and boundaries
-
-Personal project by César Reverón, developed with Codex assistance. The [verification record](docs/verification.md) documents **20 passing tests**, including real FFmpeg extraction/cache reuse, and a fresh-environment installation check.
-
-These are specific observed examples, not a cross-platform accuracy or reliability benchmark. Platform restrictions, transcription errors, and sparse frame sampling remain limitations. The public package does not include the original local Codex skill installation.
-
-The screenshots are a designed walkthrough of sanitized saved records, not a shipped app UI. Raw media, full transcripts, logs, chats, credentials, and local configuration remain private. [Publication boundaries](docs/publication.md).
-
-The [HTML walkthrough](docs/walkthrough.html) is also included for local viewing: run `python3 -m http.server 8000 --bind 127.0.0.1` from this repository, then open `http://127.0.0.1:8000/docs/walkthrough.html`.
+The hosted walkthrough is static documentation. Collection and interpretation run locally; no hosted analysis service or model API is bundled.

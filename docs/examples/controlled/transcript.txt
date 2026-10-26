@@ -1,0 +1,1 @@
+[00:00-00:06] The indicator changes position halfway through.
